@@ -1,0 +1,380 @@
+/* 🌌 全頁設定 */
+body {
+  margin: 0;
+  background-color: #222;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* 🎮 遊戲容器 */
+#game-container {
+  position: relative;
+}
+
+/* 📊 分數顯示 */
+#score {
+  position: absolute;
+  top: 20px;
+  right: 20px; /* ✅ 移到右上角 */
+  font-size: 18px;
+  color: white;
+  background-color: #ff77aa;
+  padding: 10px 18px;
+  border-radius: 999px; /* ✅ 做出圓圓的可愛按鈕感 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  z-index: 2;
+  user-select: none; /* 防止文字選取 */
+  font-family: "Comic Sans MS", cursive, sans-serif; /* 可愛字體 */
+  transition: transform 0.2s ease;
+}
+
+#score:hover {
+  transform: scale(1.1); /* ✅ 滑過也會有彈跳感 */
+}
+
+/* 🟢 開始畫面設定 */
+#start-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  font-family: "Comic Sans MS", "cursive", sans-serif;
+  text-align: center;
+  pointer-events: auto;
+}
+
+/* 🌫️ 開始畫面背景遮罩 */
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 30, 30, 0.5);
+  z-index: -1;
+}
+
+/* 🏞️ 遊戲標題 */
+#game-title {
+  font-size: 48px;
+  color: white;
+  text-shadow: 2px 2px #000;
+  margin-bottom: 20px;
+}
+
+/* ▶️ 開始按鈕 */
+#start-button {
+  padding: 12px 24px;
+  font-size: 20px;
+  font-weight: bold;
+  width: 140px;
+  background-color: #ff77aa;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px #333;
+  transition: transform 0.2s ease;
+}
+
+#start-button:hover {
+  transform: scale(1.1);
+}
+
+/* ❌ Game Over 畫面 */
+#game-over-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 400px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+/* ⬇️ 黑幕動畫 */
+.game-over-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  animation: dropDown 0.6s ease forwards;
+  opacity: 0.8;
+  z-index: -1;
+  pointer-events: none;       /* 🔒 不讓黑幕吃掉點擊事件 */
+}
+
+/* ⬇️ 黑幕下落動畫定義 */
+@keyframes dropDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* 📝 Game Over 內容框 */
+.game-over-content {
+  text-align: center;
+  color: white;
+  position: relative;         /* 確保在 z-index 上能覆蓋 overlay */
+  z-index: 10;                /* 比 overlay 高就好 */
+  pointer-events: auto;       /* 確保可以點擊 */
+}
+
+/* 🧑‍💻 姓名輸入欄 */
+#player-name {
+  padding: 8px;
+  margin-top: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+}
+
+/* 📤 分數送出按鈕 */
+#submit-score {
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  background-color: #ff77aa;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* 📊 排行榜按鈕 */
+#view-leaderboard {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  width: 140px;
+  background-color: #77ddff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease; /* ✅ 加這行 */
+}
+
+#view-leaderboard:hover {
+  transform: scale(1.1); /* ✅ 加這行 */
+}
+
+/* 📋 彈窗樣式 */
+.popup-content ol {
+  padding: 0;
+  list-style: decimal;
+  text-align: left;
+}
+
+.popup-content li {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 📊 排行榜彈窗美化 */
+#leaderboard-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: none; /* 預設隱藏 */
+  justify-content: center;
+  align-items: center;
+  z-index: 15;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  width: 85%;
+  max-height: 85%;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  text-align: center;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.popup-content h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+/* 🏅 每筆排名條目設計 */
+#popup-leaderboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#popup-leaderboard-list li {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#popup-leaderboard-list li span.rank {
+  font-weight: bold;
+  color: #ff8800;
+  margin-right: 12px;
+}
+
+#popup-leaderboard-list li span.name {
+  flex: 1;
+  text-align: left;
+  color: #333;
+}
+
+#popup-leaderboard-list li span.score {
+  color: #444;
+  font-weight: bold;
+  margin-right: 12px;
+}
+
+#popup-leaderboard-list li span.time {
+  color: #888;
+  font-size: 14px;
+}
+
+/* 📤 關閉按鈕 */
+#close-leaderboard {
+  margin-top: 16px;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #ff77aa;
+  color: white;
+  cursor: pointer;
+}
+
+/* 🎯 共通按鈕動畫效果（建議統一）*/
+#start-button,
+#view-leaderboard,
+#close-leaderboard,
+#submit-score {
+  transition: transform 0.2s ease;
+}
+
+#start-button:hover,
+#view-leaderboard:hover,
+#close-leaderboard:hover,
+#submit-score:hover {
+  transform: scale(1.1);
+}
+
+.popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 24px;
+  border-radius: 16px;
+  width: 85%;
+  max-width: 600px;
+  text-align: center;
+  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.quiz-button {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #77ddff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.quiz-button:hover {
+  transform: scale(1.1);
+}
+
+#quiz-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+#quiz-screen::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6); /* 🕶️ 黑遮罩 */
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.quiz-btn {
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: none;
+  background-color: #77ddff;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  font-weight: bold;
+}
+
+.quiz-btn:hover {
+  transform: scale(1.1);
+}
+

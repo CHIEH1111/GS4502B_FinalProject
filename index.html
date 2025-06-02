@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>跑酷大冒險</title>
+
+  <!-- 🔗 載入外部 CSS 樣式 -->
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+  <!-- 🎮 遊戲主容器 -->
+  <div id="game-container">
+    <!-- 🎨 遊戲畫布 -->
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+
+    <!-- 📊 分數顯示 -->
+    <div id="score">Score: 0</div>
+
+    <!-- 🟢 開始畫面 -->
+    <div id="start-screen">
+      <div class="overlay"></div>
+      <h1 id="game-title">🏃‍♀️空白鍵按到你手軟😨</h1>
+      <button id="start-button">開始遊戲</button>
+      <button id="view-leaderboard">查看排行榜</button>
+
+      <!-- 📊 排行榜彈窗 -->
+      <div id="leaderboard-popup" class="hidden">
+        <div class="popup-content">
+          <h2>🏆 排行榜</h2>
+          <ol id="popup-leaderboard-list"></ol>
+          <button id="close-leaderboard">關閉</button>
+        </div>
+      </div>
+    </div> <!-- ✅ 補上這個關閉 start-screen 的 div -->
+
+    <!-- ❌ Game Over 畫面 -->
+    <div id="game-over-screen">
+      <div class="game-over-overlay"></div>
+      <div class="game-over-content">
+        <h2>Game Over</h2>
+        <p>你的分數：<span id="final-score">0</span></p>
+        <input type="text" id="player-name" placeholder="請輸入姓名" />
+        <button id="submit-score">送出分數</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🤔 小趣味選擇題畫面 -->
+<div id="quiz-screen" class="hidden">
+  <div class="popup-content">
+    <h2>❓ Q：你喜歡俞佛還是雞佛？</h2>
+    <div class="button-group">
+      <button class="quiz-btn" data-choice="yufu">俞佛 🙏</button>
+      <button class="quiz-btn" data-choice="jifu">雞佛 🐓</button>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- 🔥 Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <!-- 📜 遊戲主程式 -->
+  <script src="script.js"></script>
+</body>
+</html>
